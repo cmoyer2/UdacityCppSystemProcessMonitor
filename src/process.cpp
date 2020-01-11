@@ -3,31 +3,60 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <iostream>
 
 #include "process.h"
 
 using std::string;
+using std::stoi;
 using std::to_string;
 using std::vector;
 
-// TODO: Return this process's ID
-int Process::Pid() { return 0; }
+int Process::Pid() { return pid; }
 
-// TODO: Return this process's CPU utilization
-float Process::CpuUtilization() { return 0; }
+void Process::Pid(int pid) {
+    this->pid = pid;
+}
 
-// TODO: Return the command that generated this process
-string Process::Command() { return string(); }
+float Process::CpuUtilization() { return cpuUtilization; }
 
-// TODO: Return this process's memory utilization
-string Process::Ram() { return string(); }
+void Process::CpuUtilization(float cpuUtilization) {
+    this->cpuUtilization = cpuUtilization;
+}
 
-// TODO: Return the user (name) that generated this process
-string Process::User() { return string(); }
+string Process::Command() { return command; }
 
-// TODO: Return the age of this process (in seconds)
-long int Process::UpTime() { return 0; }
+void Process::Command(string command) {
+    this->command = command;
+}
 
-// TODO: Overload the "less than" comparison operator for Process objects
-// REMOVE: [[maybe_unused]] once you define the function
-bool Process::operator<(Process const& a[[maybe_unused]]) const { return true; }
+string Process::Ram() { return ram; }
+
+void Process::Ram(string ram) {
+    this->ram = ram;
+}
+
+string Process::User() { return user; }
+
+void Process::User(string user) {
+    this->user = user;
+}
+
+long int Process::UpTime() { return uptime; }
+
+void Process::UpTime(long int uptime) {
+    this->uptime = uptime;
+}
+
+// DONE: Overload the "less than" comparison operator for Process objects
+bool Process::operator<(Process const& a) const {
+     float this_temp = this->cpuUtilization;
+     float a_temp = a.cpuUtilization;
+     return this_temp < a_temp;
+}
+
+bool Process::operator>(Process const& a) const {
+     float this_temp = this->cpuUtilization;
+     float a_temp = a.cpuUtilization;
+     return this_temp > a_temp;    
+}
